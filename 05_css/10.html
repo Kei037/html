@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>스타일시트</title>
+    <style>
+        /*
+        * 스타일 우선순위(1위 ~ 5위)
+        1. !important -> 스타일에 강제 스타일 적용시 사용 ex) background-color: yellow !important;
+        2. 인라인 스타일(Inline style) ex) <h2 style="color:green">
+        3. 선택자 id ex) #id { color:#000; }
+        4. 선택자 .class ex) .class { color:#000; }
+        5. 선택자가 tag ex) h1 { color:#fff; }
+        */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            font-style: italic;
+            color: red !important;
+        }
+        p {
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>디자인 스킬업</h1>
+    <p style="color: blue">
+        편집 포함될 수 있는 북커버 및 동화책 삽화 제작, 웹 포트폴리오에 포함될 수 있는 아트웍 실습,
+        3D 캐릭터 디자인이나 모션 그래픽에 사용할 수 있는 아트웍 표현에 대하여 학습합니다.
+    </p>
+</body>
+</html>

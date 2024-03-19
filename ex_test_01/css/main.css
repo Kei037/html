@@ -1,0 +1,45 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+}
+
+#wrap {
+    width: 440px;
+    margin: 10px;
+}
+
+.top_bar {
+    background-color: rgb(110, 156, 159);
+    width: 100%;
+    text-align: center;
+}
+
+.top_strong {
+    color: white;
+    font-size: 14px;
+}
+
+.top_bar2 {
+    background-color: antiquewhite;
+}
+
+.p1 {
+    color: red;
+}
+
+.big_first {
+    color: blue;
+    font-size: 30px;
+}
+
+.bottom_bar {
+    background-color: antiquewhite;
+}
+
+.bottom_bar2 {
+    background-color: orange;;
+}
+
+.cus_li {
+    text-decoration: underline;
+}
