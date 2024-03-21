@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>nth-child</title>
+    <style>
+        li {
+            list-style: none;
+            float: left;
+            padding: 15px;
+        }
+        li:nth-child(2n + 1) {
+            background: darkred;
+        }
+        li:nth-child(2n) {
+            background: orangered;
+        }
+        li:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+        li:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>First</li>
+    <li>Second</li>
+    <li>Third</li>
+    <li>Fourth</li>
+    <li>Fifth</li>
+    <li>Sixth</li>
+    <li>Seventh</li>
+</ul>
+</body>
+</html>

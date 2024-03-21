@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>nth-child</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            line-height: 40px;
+            width: 100%;
+            display: block;
+        }
+        li {
+            background: black;
+            float: left;
+            width: 140px;
+            height: 40px;
+            list-style: none;
+            text-align: center;
+            margin: 5px;
+        }
+        li:nth-child(2n) {
+            background: gray;
+        }
+        li:hover {
+            background: pink;
+        }
+        li:active {
+            background: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navi">
+            <ul>
+                <li><a href="#">이용 안내</a></li>
+                <li><a href="#">객실 소개</a></li>
+                <li><a href="#">예약 방법 및 요금</a></li>
+                <li><a href="#">예약하기</a></li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
