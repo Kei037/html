@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/reset.css" type="text/css">
+    <style>
+        #top {
+            width: 1000px;
+            height: 500px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .top-01 {
+            width: 750px;
+            height: 500px;
+            float: left;
+            background-image: url("./img/0320-1.jpg");
+        }
+        .top-01 div {
+            width: 250px;
+            height: 250px;
+            margin-top: 250px;
+            padding: 20px;
+        }
+        .top-01 div h4, .box_left div h4 {
+            line-height: 18px;
+        }
+        .top-01 div p, .box_left div p {
+            line-height: 20px;
+        }
+        .top-02 {
+            width: 250px;
+            height: 500px;
+            overflow: hidden;
+            float: right;
+
+        }
+        .top-02 div {
+            width: 250px;
+            height: 250px;
+        }
+
+        #box_all {
+            width: 1000px;
+            height: 500px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .box_left {
+            width: 750px;
+            height: 500px;
+            overflow: hidden;
+            float: left;
+        }
+        .box_left div{
+            width: 250px;
+            height: 250px;
+            float: left;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .box_left div:nth-child(2n + 1) {
+            background: lightcoral;
+        }
+        .box_left div:nth-child(2n) {
+            background: lightgoldenrodyellow;
+        }
+        .box_right {
+            width: 250px;
+            height: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+            float: right;
+            background: #ffd800;
+        }
+
+        #footer {
+            width: 1000px;
+            height: 50px;
+            margin: 0 auto;
+        }
+        #footer .footer_left {
+            width: 750px;
+            height: 50px;
+            float: left;
+            background: darkgray;
+        }
+        #footer .footer_left ul {
+            height: 10px;
+            margin-left: 20px;
+        }
+        #footer .footer_left ul li {
+            float: left;
+            margin: 10px;
+            padding-right: 20px;
+            display: block;
+            vertical-align: middle;
+            color: #fff;
+            border-right: 1px solid orange;
+        }
+        #footer .footer_left ul li:last-child {
+            border-right: none;
+        }
+        #footer .footer_right {
+            width: 250px;
+            height: 100%;
+            float: right;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #footer .footer_right .select-site {
+            width: 200px;
+            height: 35px;
+            padding-left: 25px;
+            background: #999;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div id="top">
+    <div class="top-01">
+        <div>
+            <h4>
+                GLOBAL<br>
+                BUSINESS
+            </h4>
+            <br>
+            <p>
+                GLOBAL No.1 lifestyle Media<br>
+                Shopping Leader
+            </p>
+            <p>
+                라이프스타일을 선도하는 세계최<br>
+                고의 미디어 쇼핑리더
+            </p>
+        </div>
+    </div>
+    <div class="top-02">
+        <div><img src="img/0320-2.jpg"></div>
+        <div><img src="img/0320-3.jpg"></div>
+    </div>
+</div>
+
+<div id="box_all">
+    <div class="box_left">
+        <div>
+            <h4>
+                CSV
+            </h4>
+            <br>
+            <p>
+                상생 이념을 통해 함께 성장하고<br>
+                사회에 공헌하는 CSV프로그램과<br>
+                활동소식을 안내합니다.
+            </p>
+        </div>
+        <div>
+            <h4>
+                입점안내
+            </h4>
+            <br>
+            <p>
+                고객에게 늘 새롭고 Trendy한 제<br>
+                안을 하는 CJ O Shopping! 힘찬도<br>
+                약을 함께 할 동반자를 찾습니다.
+            </p>
+        </div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </div>
+    <div class="box_right">7</div>
+</div>
+
+<div id="footer">
+    <div class="footer_left">
+        <ul>
+            <li>법적고지</li>
+            <li>이메일무단수집거부</li>
+            <li>이용약관</li>
+            <li>개인정보취급방침</li>
+            <li>고객센터</li>
+            <li>입찰공고</li>
+        </ul>
+    </div>
+    <div class="footer_right">
+        <select class="select-site">
+            <option value="#">cj그룹계열사바로가기</option>
+        </select>
+    </div>
+</div>
+</body>
+</html>
