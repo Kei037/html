@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/reset.css" type="text/css">
+    <style>
+        #wrap {
+            width: 1000px;
+            height: 500px;
+            margin: 0 auto;
+        }
+        .top {
+            width: 1000px;
+            height: 40px;
+            border-bottom: 2px solid gray;
+        }
+
+        .mid {
+            width: 1000px;
+            height: 220px;
+        }
+        .mid h1 {
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+        }
+        .mid div.text-box {
+            background: lightgray;
+            box-sizing: border-box;
+            width: 950px;
+            height: 140px;
+            border: 2px solid black;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            margin: 0 auto;
+            line-height: 20px;
+        }
+        .mid div.agree-check {
+            width: 950px;
+            height: 20px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .bottom ul li {
+            height: 60px;
+            line-height: 60px;
+            border-top: 1px dotted black;
+            font-weight: 700;
+        }
+        .bottom ul li:nth-child(1) {
+            width: 120px;
+            margin-left: 100px;
+            margin-right: 20px;
+            float: left;
+            text-align: center;
+        }
+        div.bottom > form > ul:nth-child(3) > li:nth-child(2) {
+            border-bottom: 1px dotted black;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="top"></div>
+        <div class="mid">
+            <h1>약관동의</h1>
+            <div class="text-box">
+                <p>
+                    제1조(목적)<br>
+                    이 약관은  회사(전자거래 사업자)가 운영하는 사이버 몰(이하 "몰"이라 한다)에서 제공하는 인터넷 관련 서비스(이하 "서비스"라 한다)를 이용함에 있어 사이버몰과 이용자의 권리·의무 및 책임사항을 규정함을 목적으로 합니다. ※ 「PC통신등을 이용하는 전자거래에 대해서도 그 성질에 반하지 않는한 이 약관을 준용합니다」
+                    <br><br>
+                    제2조(정의)
+                    <br>
+                    "몰"이란 회사가 재화 또는 용역을 이용자에게 제공하기 위하여 컴퓨터등 정보통신설비를 이용하여 재화 또는 용역을 거래할 수 있도록 설정한 가상의 영업장을 말하며, 아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.
+                    "이용자"란 "몰"에 접속하여 이 약관에 따라 "몰"이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.
+                    <br><br>
+                    회원’이라 함은 "몰"에 개인정보를 제공하여 회원등록을 한 자로서, "몰"의 정보를 지속적으로 제공받으며, "몰"이 제공하는 서비스를 계속적으로 이용할 수 있는 자를 말합니다.
+                    비회원’이라 함은 회원에 가입하지 않고 "몰"이 제공하는 서비스를 이용하는 자를 말합니다.
+                </p>
+            </div>
+            <div class="agree-check">
+                <input type="radio" name="agreement" value="agreement" id="agreement" checked>
+                <label for="agreement">동의 안함</label>
+
+                <input type="radio" name="agreement" value="disagreement" id="disagreement">
+                <label for="disagreement">동의 함</label>
+            </div>
+        </div>
+        <div class="bottom">
+            <form>
+                <ul>
+                    <li><label for="memberId">아이디</label></li>
+                    <li><input type="text" name="memberId" id="memberId"></li>
+                </ul>
+                <ul>
+                    <li><label for="passwd">비밀번호</label></li>
+                    <li><input type="password" name="password" id="passwd"></li>
+                </ul>
+                <ul>
+                    <li><label for="passwd-check">비밀번호 확인</label></li>
+                    <li><input type="password" name="passwd-check" id="passwd-check"></li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
