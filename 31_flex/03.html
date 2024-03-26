@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            width: 100%;
+            height: 100vh;
+            background-color: lightcyan;
+        }
+        section {
+            border: 10px solid blue;
+        }
+        section article {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+            border: 1px solid #000000;
+        }
+        /* flex-wrap
+        flex-wrap : nowrap - 자식 요소의 줄 바꿈을 하지 않음. 기본 값
+        flex-wrap : wrap - 자식 요소의 줄 바꿈을 함
+        flex-wrap : wrap-reverse - 자식 요소를 줄바굼. 여러 줄이 되면 아래에서 위로 배치
+        */
+        section {
+            display: flex;
+            /*flex-direction: row;*/
+            /*flex-wrap: wrap;*/
+            flex-flow: row wrap;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <article>1</article>
+            <article>2</article>
+            <article>3</article>
+            <article>4</article>
+            <article>5</article>
+            <article>6</article>
+            <article>7</article>
+        </section>
+    </main>
+</body>
+</html>
