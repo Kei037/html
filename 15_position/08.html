@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            /*height: 3000px;*/
+        }
+        .movie {
+            width: 700px;
+            height: 500px;
+            border: 2px solid gray;
+            background-color: lightblue;
+            position: relative;
+        }
+        .movie div {
+            width: 120px;
+            height: 120px;
+            border: none;
+            border-radius: 120px;
+            line-height: 120px;
+            background-color: antiquewhite;
+            font-size: 30px;
+            text-align: center;
+
+            position: absolute;
+        }
+
+        .prev {
+            top: 50%;
+            left: 10px;
+            margin-top: -60px;
+        }
+        .next {
+            top: calc(50% - 60px);
+            right: 10px;
+        }
+        .play {
+            top: calc(50% - 60px);
+            left: calc(50% - 60px);
+        }
+    </style>
+</head>
+<body>
+<div class="movie">
+    <div class="prev">PREV</div>
+    <div class="play">▶︎</div>
+    <div class="next">NEXT</div>
+</div>
+</body>
+</html>
