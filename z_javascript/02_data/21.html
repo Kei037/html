@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        숫자 자료형으로 변환하기
+        prompt 로 입력을 받으면 기본형이 문자열
+        * */
+        const rawInput = prompt('inch 단위의 숫자를 입력해주세요.')  // 숫자를 입력
+        console.log(typeof rawInput) // string
+
+        const inch = Number(rawInput)
+        console.log(typeof inch)
+        const cm = inch * 2.54;  // number
+
+        // 출력
+        // alert(inch + 'inch는 ' + cm + 'cm' + '입니다.');
+
+        alert(`${inch}inch는 ${cm}cm 입니다.`);
+
+        const rawInput2 = prompt('cm 단위의 숫자를 입력해주세요.')  // 숫자를 입력
+        console.log(typeof rawInput2) // string
+
+        const cm2 = Number(rawInput2)
+        const inch2 = cm2 / 2.54;
+
+        alert(`${cm2}cm는 ${inch2}inch 입니다.`)
+    </script>
+</head>
+<body>
+
+</body>
+</html>
