@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /* 함수를 변수에 할당하는 방법 2가지. */
+        // 1. 변수에 할당하면서 선언적 함수 선언.
+        const func2nd = function namedFunc2nd() {
+            console.log('namedFunc2nd() 함수 내부의 코드입니다...');
+            console.log('');
+        }
+        // 호출
+        func2nd();  // 변수를 통해 함수를 호출
+        // namedFunc2nd();  // Uncaught ReferenceError: namedFunc2nd is not defined
+        // 변수에 할당하면서 선언적 함수를 선언하면 익명함수로 처리.
+        console.log(typeof func2nd)
+
+        // 2. 선언적 함수를 선언 후에 변수에 할당.
+        function namedFunc() {
+            console.log('namedFunc2nd() 함수 내부의 코드입니다...');
+            console.log('');
+        }
+        const func1st = namedFunc; // 선언적 함수를 변수에 할당.
+
+        func1st();  // 변수를 통해 함수를 호출
+        namedFunc();  // 함수를 호출
+        console.log(typeof func1st);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

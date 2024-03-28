@@ -4,29 +4,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
-        // script로 구분이 되어 있으면 실행이 안됨.
-        // compute();  // Uncaught ReferenceError: compute is not defined
-    </script>
-    <script>
-        compute() // 0.1
-        function compute () {
+        // 익명함수는 변수 선언(함수 정의) 후 호출 가능.
+        // 익명함수는 동일한 이름으로 재선언 불가능. let과 const의 특징
+        // 익명함수
+        compute();
+        let compute = function () {
             let x = 10;
             let y = 100;
-            let result = x / y;
-            console.log(result)
-        }
-        compute(); // 0.1
+            let result = x * y;
+            console.log(result);
+        };
+        compute();
     </script>
     <script>
-        // 선언적 함수는 재정의 가능
-        compute() // 110
-        function compute () {
+        let compute = function () {
             let x = 10;
             let y = 100;
-            let result = x + y;
-            console.log(result)
-        }
-        compute(); // 110
+            let result = x * y;
+            console.log(result);
+        };
     </script>
 </head>
 <body>

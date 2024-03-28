@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #galleryZone {
+            text-align: center;
+        }
+    </style>
+    <script>
+        /* 종료 목적의 return */
+        let num = 1;
+        const showGallery = function (direction) {
+            if (direction) {
+                if (num === 9) {
+                    num = 0;
+                    alert('마지막 이미지입니다.')
+                    // return; // 이미지가 9개인 경우 num이 9인 경우 함수 종료
+                }
+                num++;
+            }else {
+                if (num === 1) {
+                    num = 10;
+                    alert('처음 이미지입니다.')
+                    // return;
+                }
+                num--;
+            }
+            const imgTag = document.getElementById('photo'); // id 값이 photo 인 요소를 가져옴
+            imgTag.setAttribute('src', 'images/pic_' + num + '.jpg') // id 값이 photo 인 요소의 src 속성을 변경
+        }
+    </script>
+</head>
+<body>
+    <div id="galleryZone">
+        <p><img src="images/pic_1.jpg" id="photo" alt=""></p>
+        <p>
+            <button onclick="showGallery(0)">이전</button>
+            <button onclick="showGallery(1)">다음</button>
+        </p>
+    </div>
+</body>
+</html>
