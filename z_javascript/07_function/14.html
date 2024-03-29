@@ -4,7 +4,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
+        /*
+        * 기본적인 사용자 정의 함수 예제 : a 부터 b까지 더하는 함수
+        */
+        const sumAll = function (a, b) {
+            let sum = 0;
+            while (a <= b) {
+                sum += a;
+                a++;
+            }
+            return sum;
+        }
 
+        console.log(`1부터 100까지의 합: ${sumAll(1, 100)}`) // 5050
+        console.log(`1부터 100까지의 합: ${sumAll(1, 500)}`) // 125250
     </script>
 </head>
 <body>
