@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        const isLeapYear = function (year = new Date().getFullYear()) {
+            const isLeapYear = (year % 4 ===0) && (year % 100 !== 0) || (year % 400 === 0);
+            return isLeapYear
+        }
+
+        console.log(`올해는 윤년일가? === ${isLeapYear()}`);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

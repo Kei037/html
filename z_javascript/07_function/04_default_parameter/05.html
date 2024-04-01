@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /* var 에서 블럭 사용과 즉시 호출 함수 */
+        var animal = 'dog';
+        console.log(animal);  // dog
+
+        {
+            var animal = 'cat';
+            console.log(animal);  // cat
+        }
+        console.log(animal)  // cat. 블럭에서 사용했지만 블럭 밖에서 변수 사용이됨
+
+        var animal = 'dog';
+
+        console.log(animal);  // dog
+        (function () {
+            var animal = 'cat';
+            console.log(animal);  // cat
+        })();
+
+        console.log(animal)  // dog. 즉시 호출 함수의 경우에는 함수 블럭 안에서만 변수의 범위가 제한 됨.
+    </script>
+</head>
+<body>
+
+</body>
+</html>

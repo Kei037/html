@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function func () {
+            console.log('선언적 함수입니다.');
+            function inner () {
+                console.log('내부입니다.');
+            }
+        }
+        func();
+
+        let changeColor = (function () {
+            let i = 0;
+            console.log(i)
+            let color = ['white', 'yellow', 'aqua', 'purple']
+            const exec = function () {
+                const bodyTag = document.querySelector('body'); // body 태그를 불러옴.
+                bodyTag.style.backgroundColor = color[++i % color.length]; // body 태그의 background-color 를 변경.
+            };
+            return exec;
+        })();
+    </script>
+</head>
+<body>
+
+<button onclick="changeColor();">배경색 바꾸기</button>
+
+</body>
+</html>
