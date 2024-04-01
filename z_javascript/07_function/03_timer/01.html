@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        타이머 함수 : 특정 시간 이후에 콜백함수를 호출할 수 있는 함수
+
+        setTimeout(함수, 시간) : 특정 시간 후에 함수를 한 번 호출.
+        setInterval(함수, 시간) : 특정 시간마다 함수를 호출
+        */
+        setTimeout(function () {
+            console.log(`2초 후에 실행됩니다.`)
+        }, 2 * 1000)
+
+        let count = 0;
+        setInterval(() => {
+            console.log(`2초마다 실행됩니다. (${count}번쨰)`)
+        }, 2 * 1000);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

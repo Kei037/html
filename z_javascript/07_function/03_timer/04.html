@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 300px;
+        }
+        button {
+            width: 200px;
+            height: 100px;
+            display: inline-block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        const rainbow = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+
+        let count = 1;
+        let timer = function () {
+            document.querySelector('div').innerHTML = String(count);
+            document.querySelector('div').style.color = rainbow[count % rainbow.length];
+            count++;
+        };
+
+        let id = setInterval(timer, 1 * 1000);
+
+        const stop = function () {
+            clearInterval(id);
+            console.log(`타이머를 종료합니다.`);
+        }
+        const restartTimer = function () {
+            id = setInterval(timer, 1 * 1000);
+        }
+
+    </script>
+</head>
+<body>
+
+<div>0</div>
+<button onclick="stop()">정지</button>
+<button onclick="restartTimer()">재시작</button>
+
+</body>
+</html>

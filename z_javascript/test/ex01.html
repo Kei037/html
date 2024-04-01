@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: rgba(167, 221, 234);
+        }
+        .count {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+            font-size: 100px;
+            color: #fff;
+        }
+        .btn_area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: lightgray;
+        }
+        .btn_area div {
+            width: 150px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            color: #fff;
+            cursor: pointer;
+        }
+        .btn_area div:nth-of-type(3) {
+            background: red;
+        }
+    </style>
+    <script>
+        let count = 1;
+        let timer = function () {
+            document.querySelector('div').innerHTML = String(count);
+            count++;
+        };
+
+        // let id = setInterval(timer, 1 * 1000);
+        const startTimer = function () {
+            id = setInterval(timer, 1 * 1000);
+        }
+        const stop = function () {
+            clearInterval(id);
+        }
+        const resetTimer = function () {
+            count = 0;
+            document.querySelector('div').innerHTML = String(count);
+            clearInterval(id);
+            id = setInterval(timer, 1 * 1000);
+        }
+    </script>
+</head>
+<body>
+    <div class="count">0</div>
+    <div class="btn_area">
+        <div onclick="startTimer()">start</div>
+        <div onclick="stop()">pause</div>
+        <div onclick="resetTimer()">reset</div>
+    </div>
+</body>
+</html>

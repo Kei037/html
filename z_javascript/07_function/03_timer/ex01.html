@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            width: 100vw;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 300px;
+        }
+        button {
+            width: 200px;
+            height: 100px;
+            display: inline-block;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        const one = ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'];
+
+        let count = 0;
+        let ten = 0;
+        let strtmp = '';
+        setInterval(function () {
+            if (count < 10) {
+                ten++;
+                strtmp = one[count % 10];
+            }
+            if (ten === 1) {
+                strtmp = one[count % 10] + '십';
+            }
+            document.querySelector('div').innerHTML = strtmp;
+            count++;
+        }, 1 * 100);
+
+    </script>
+</head>
+<body>
+    <div>영</div>
+</body>
+</html>
