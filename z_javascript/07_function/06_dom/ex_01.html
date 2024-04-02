@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul {
+            width: 100%;
+        }
+        li {
+            width: 100%;
+            height: 40px;
+        }
+    </style>
+    <script>
+        /*
+        1. 버튼을 클릭하면 무지개색 li가 추가
+        2. 같은 색깔의 li는 2개가 될 수 없음.
+        */
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.querySelector('button:nth-child(1)');
+            const btnDelGreen = document.querySelector('button:nth-child(2)');
+            const ulTag = document.querySelector('ul');
+            let color = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+            let i = 0;
+
+            btn.addEventListener('click', () => {
+                const li = document.createElement('li');
+
+                li.setAttribute('class', color[i % color.length]);
+
+                li.textContent = color[i % color.length];
+                li.style.backgroundColor = color[i++ % color.length];
+                li.style.color = 'white'
+
+                if (i > color.length) {
+                    const firstLi = document.querySelector('ul li:nth-child(1)');
+                    firstLi.parentNode.removeChild(firstLi)
+                }
+                ulTag.appendChild(li);
+            })
+
+            btnDelGreen.addEventListener('click', () => {
+                const greens = document.querySelectorAll('.green');
+                greens.forEach((item) => {
+                    item.parentNode.removeChild(item)
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<button>무지개색 추가</button>
+<button>녹색 제거</button>
+    <ul>
+
+    </ul>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // querySelector(선택자) : 요소를 하나만 추출
+        // querySelectorAll(선택자) : 선택자에 해당하는 모든 문서 객체를 배열로 가져옴.
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('h1'); // 제일 먼저 나오는 요소 하나만 가져옴.
+
+            header.textContent = 'HEADERS';
+            header.style.color = 'white';
+            header.style.backgroundColor = 'black';
+            header.style.padding = '10px';
+
+            const headersAll = document.querySelectorAll('h2');
+            console.log(headersAll);
+            headersAll.forEach((item) => {
+                item.textContent = 'HEADERSALL';
+                item.style.color = 'red';
+                item.style.backgroundColor = 'black';
+                item.style.padding = '20px';
+            });
+
+            for (let i = 0; i <headersAll.length; i++) {
+                headersAll[i].style.color = 'red';
+            }
+
+            for(let idx in [...headersAll]) {
+                headersAll[idx].style.color = 'blue';
+            }
+
+            for (const item of headersAll) {
+                item.style.color = 'orange';
+            }
+
+
+        });
+    </script>
+</head>
+<body>
+<h1></h1>
+<h1>2</h1>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+<h2></h2>
+
+
+
+</body>
+</html>

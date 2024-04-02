@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>Click me!</button>
+    <script>
+        const btn = document.querySelector('button');
+        btn.addEventListener('click', function foo() { // 함수 이름을 지정해준다.
+            console.log('button Click');
+
+            // 이벤트 핸들러를 제거. 따라서 이벤트 해들러는 단 한 번만 호출. (한 번만 동작해야 할 것. 로그 한 번만 찍을 것 등등)
+            btn.removeEventListener('click', foo);
+        });
+    </script>
+</body>
+</html>

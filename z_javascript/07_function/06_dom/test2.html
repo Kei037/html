@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>클릭</button>
+    <button onclick="remove()">제거</button>
+    <script>
+        count = 0;
+        const btn = document.querySelector('button');
+        const handleClick = function () {
+            count ++;
+            alert(`${count}번째 클릭!`);
+        };
+        btn.addEventListener('click', handleClick);
+
+        const remove = function () {
+            btn.removeEventListener('click', handleClick);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // 버튼을 클릭하면 버튼에 있는 색상으로 과일 목록이 글자색이 변하도록
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = document.querySelectorAll('div button')
+            const fluats = document.querySelectorAll('ul li')
+            const colors = ['red', 'orange', 'yellow']
+
+            btns.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    fluats.forEach((item) => {
+                        item.style.color = colors[index];
+                    })
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li id="apple">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="orange">Orange</li>
+    </ul>
+    <div>
+        <button>red</button>
+        <button>orange</button>
+        <button>yellow</button>
+    </div>
+</body>
+</html>

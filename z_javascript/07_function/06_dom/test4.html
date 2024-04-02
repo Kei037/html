@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>배경색 변경</button>
+    <button>배경색 초기화</button>
+
+    <script>
+        const btnClick = document.querySelector('button:nth-child(1)');
+        const btnRemove = document.querySelector('button:nth-child(2)');
+
+        const color = ['red', 'orange', 'yellow', 'blue'];
+        let i = 0;
+
+        let changeColor = function () {
+            const bodyTag = document.querySelector('body');
+            bodyTag.style.backgroundColor = color[i++ % color.length];
+        }
+        btnClick.addEventListener('click', changeColor)
+
+        btnRemove.addEventListener('click', () => {
+            const bodyTag = document.querySelector('body');
+            bodyTag.style.backgroundColor = 'white';
+            btnClick.removeEventListener('click', changeColor);
+        })
+    </script>
+</body>
+</html>
