@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.querySelector('input')
+            const p = document.querySelector('p')
+
+            const isPhone = (value) => {
+                let phoneNum = value.replaceAll('-', '');
+
+                return (value.split('-')[0].length === 3)
+                    && (value.split('-')[1].length === 4)
+                    && (value.split('-')[2].length === 4)
+                    && (!isNaN(phoneNum))
+                    && (value.split('-')[0] === '010')
+                    && (value.length === 13)
+                    && (phoneNum.length === 11);
+                // return (value.indexOf('-')[0] === 3) && (value.indexOf('-')[1] === 4)
+                //     && (value.indexOf('-')[2] === 4);
+            }
+
+            input.addEventListener('keyup', function (event) {
+                const value = event.currentTarget.value;
+
+                if(isPhone(value)) {
+                    p.style.color = 'green';
+                    p.textContent = `휴대폰 형식입니다: ${value}`;
+                } else {
+                    p.style.color = 'red';
+                    p.textContent = `휴대폰 형식이 아닙니다: ${value}`;
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <input type="text">
+    <p></p>
+</body>
+</html>

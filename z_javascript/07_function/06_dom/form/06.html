@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const h1 = document.querySelector('h1');
+            const checkbox = document.querySelector('input');
+
+            checkbox.addEventListener('change', (event) => {
+                let count = 1;
+
+                let timer = function () {
+                    h1.textContent = `${count++}초`
+                };
+                const start = function () {
+                    setInterval(timer, 1 * 1000)
+                }
+                const stop = function () {
+                    clearInterval(timer)
+                }
+
+                console.log(event.currentTarget.checked)
+                if (event.currentTarget.checked) { // 체크 상태
+                    start()
+                } else {  // 체크 해제 상태
+                    stop()
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="checkbox">
+    <span>타이머 활성화</span>
+    <h1></h1>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/name_list.css">
+    <script>
+        /*
+        참가 신청 명단 프로그램 만들기
+        1. 새 노드 추가하고 표시하기
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputText = document.querySelector('input');
+            const btn = document.querySelector('button');
+            const nameList = document.querySelector('#nameList');
+
+
+            btn.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const item = document.createElement('p');
+                item.textContent = inputText.value
+                // nameList.appendChild(pTag)
+                nameList.insertBefore(item, nameList.childNodes[0]); // p 요소를 #nameList 맨 앞에 추가
+
+                inputText.value = '';
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>참가 신청</h1>
+        <form action="">
+            <input type="text" id="userName" placeholder="이름" required>
+            <button>신청</button>
+        </form>
+        <hr>
+        <div id="nameList"></div>
+    </div>
+</body>
+</html>
