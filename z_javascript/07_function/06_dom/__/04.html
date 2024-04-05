@@ -20,7 +20,19 @@
 
                 const item = document.createElement('p');
                 item.textContent = inputText.value
-                // nameList.appendChild(pTag)
+
+                const btnDel = document.createElement('span');
+                btnDel.textContent = 'X';
+                btnDel.setAttribute('class', 'del');
+
+                // 새로 생성된 요소에 이벤트를 추가할 경우 생성될 때 마다 이벤트를 등록해야 함.
+                btnDel.addEventListener('click', function () {
+                    if (confirm("삭제하시겠습니까??")){
+                        this.parentNode.parentNode.removeChild(this.parentNode)
+                    }
+                })
+                item.appendChild(btnDel)
+
                 nameList.insertBefore(item, nameList.childNodes[0]); // p 요소를 #nameList 맨 앞에 추가
 
                 inputText.value = '';
