@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./css/get_form.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const major = document.querySelector('select[name=major]')
+            const subjects = document.querySelectorAll('input[name=subject]')
+            const mailings = document.querySelectorAll('input[type=checkbox]')
+
+            major.addEventListener('change', (e) => {
+                // 1. event 사용
+                const options = e.currentTarget.options;  // option 을 배열로 반환
+                const index = e.currentTarget.options.selectedIndex  // 선택한 index 추출
+
+                let selectText = options[index].textContent
+                alert(`${selectText}를 선택했습니다.`)
+
+                // 2. event 사용안함
+                // 사용자가 선택한 항목의 인덱스는 major.selectedIndex 를 통해 알아냄
+                selectText = major.options[major.selectedIndex].textContent;
+                // alert(`${selectText}를 선택했습니다.`)
+            })
+            // 라디오 버튼 가져오기
+            subjects.forEach((subject) => {
+                subject.addEventListener('change', (e) => {
+                    const current = e.currentTarget;
+                    if (current.checked) {
+                        alert(`${current.parentNode.textContent}를 선택했습니다.`)
+                        // console.log(current.value)
+                    }
+                })
+            })
+            mailings.forEach((mailing) => {
+                mailing.addEventListener('change', (e) => {
+                    const current = e.currentTarget;
+                    if (current.checked) {
+                        alert(`${current.parentNode.textContent}를 선택했습니다.`)
+                        // alert(`${current.value}를 선택했습니다.`)
+                    } else {
+                        alert(`${current.parentNode.textContent}를 선택해제 했습니다.`)
+                        // alert(`${current.value}를 선택해제 했습니다.`)
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <h1>수강신청</h1>
+        <form name="testForm">
+            <fieldset>
+                <legend>신청인</legend>
+                <ul>
+                    <li>
+                        <label class="reg" for="userName">이름</label>
+                        <input type="text" id="userName" name="userName" maxlength="50">
+                    </li>
+                    <li>
+                        <label class="reg" for="major">학과</label>
+                        <select name="major" id="major">
+                            <option>---- 학과 선택 ----</option>
+                            <option value="architect">건축공학과</option>
+                            <option value="mechanic">기계공학과</option>
+                            <option value="industrial">산업공학과</option>
+                            <option value="elect">전기전자공학과</option>
+                            <option value="computer">컴퓨터공학과</option>
+                            <option value="chemical">화학공학과</option>
+                        </select>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>신청 과목</legend>
+                <p>이 달에 신청할 과목을 선택하세요.</p>
+                <label><input type="radio" name="subject" value="speaking">회화</label>
+                <label><input type="radio" name="subject" value="grammar">문법</label>
+                <label><input type="radio" name="subject" value="writing">작문</label>
+            </fieldset>
+            <fieldset>
+                <legend>메일링</legend>
+                <p>메일로 받고 싶은 뉴스 주제를 선택해 주세요</p>
+                <label><input type="checkbox" name="mailing1" value="news">해외 단신</label>
+                <label><input type="checkbox" name="mailing2" value="dialog">5분 회화</label>
+                <label><input type="checkbox" name="mailing3" value="pops">모닝팝스</label>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <link rel="stylesheet" href="./css/todo.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const title = document.querySelector('.add input[name=title]')
+            const dueDate = document.querySelector('.add input[name=dueDate]')
+            const btnAdd = document.querySelector('.add input[type=button]')
+            const list = document.querySelector('.list ul')
+            const deleteBtn = document.querySelector('.list input[name=delete]')
+
+            const initForm = () => {
+                title.value = '';
+                let today = new Date().toISOString().substring(0, 10);
+                dueDate.value =  today
+                dueDate.setAttribute('min', today)
+            }
+            initForm();
+
+            btnAdd.addEventListener('click', () => {
+                if (title.value === '') {
+                    alert('제목을 입력해 주세요!')
+                    title.focus();
+                    return;
+                }
+                if (dueDate.value === '') {
+                    alert('날짜를 선택해 주세요!')
+                    dueDate.focus()
+                    return;
+                }
+
+                let addItem = document.createElement('li');
+                addItem.innerHTML = `<ul>\n
+                        <li>${title.value}</li>\n
+                        <li>${dueDate.value}</li>\n
+                        <li><input type="button" name="delete" value="삭제"></li>\n
+                        </ul>`;
+                list.appendChild(addItem)
+                initForm();
+            })
+
+            deleteBtn.addEventListener('click', (e) => {
+                console.log(e.currentTarget.parentNode.parentNode.parentNode.parentNode
+                    .removeChild(e.currentTarget.parentNode.parentNode.parentNode))
+            })
+        })
+    </script>
+</head>
+<body>
+    <section class="list">
+        <h2>todo</h2>
+        <ul>
+            <li>
+                <ul>
+                    <li>할일</li>
+                    <li>2023-12-31</li>
+                    <li><input type="button" name="delete" value="삭제"></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section class="add">
+        <h2>add todo</h2>
+        <div>
+            <input type="text" name="title">
+            <input type="date" name="dueDate">
+            <input type="button" value="등록">
+        </div>
+    </section>
+</body>
+</html>
