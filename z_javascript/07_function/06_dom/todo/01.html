@@ -11,7 +11,7 @@
             const dueDate = document.querySelector('.add input[name=dueDate]')
             const btnAdd = document.querySelector('.add input[type=button]')
             const list = document.querySelector('.list ul')
-            const deleteBtn = document.querySelector('.list input[name=delete]')
+            const editBtn = document.querySelector('.edit input[type=button]')
 
             const initForm = () => {
                 title.value = '';
@@ -38,16 +38,88 @@
                         <li>${title.value}</li>\n
                         <li>${dueDate.value}</li>\n
                         <li><input type="button" name="delete" value="삭제"></li>\n
+                        <li><input type="button" name="update" value="수정"></li>\n
                         </ul>`;
-                list.appendChild(addItem)
-                initForm();
-            })
+                // 삭제 버튼
+                addItem.querySelector('[name=delete]').addEventListener('click', function (e) {
+                    // 수정전에 삭제 됬는지 확인
+                    const mdCheck = document.querySelector('input[name=mdCheck]')
+                    const title = document.querySelector('.edit input[name=title]')
+                    const dueDate = document.querySelector('.edit input[name=dueDate]')
+                    if (mdCheck !== null) {
+                        title.value = '';
+                        dueDate.value = '';
+                        alert('수정중이던 todoList가 삭제되었습니다.')
+                    }
+                    // 1. removeChild() 사용
+                    // const node = e.currentTarget.parentNode.parentNode.parentNode
+                    // node.parentNode.removeChild(node)
 
-            deleteBtn.addEventListener('click', (e) => {
-                console.log(e.currentTarget.parentNode.parentNode.parentNode.parentNode
-                    .removeChild(e.currentTarget.parentNode.parentNode.parentNode))
-            })
-        })
+                    // 2. remove() : 전체 요소에서 인덱스를 구해서 삭제
+                    // const list = document.querySelectorAll('.list ul')
+                    // const array = Array.from(list) // 배열로 가져옴
+                    // const indexNum = array.indexOf(e.currentTarget.parentNode.parentNode) // 인덱스 구함
+                    // // 인덱스 기준으로 삭제
+                    // array[indexNum].parentNode.remove();
+
+                    // 3. 바로삭제
+                    addItem.remove();
+                });
+
+                // 수정 버튼
+                addItem.querySelector('[name=update]').addEventListener('click', function (e) {
+                    // 할일
+                    const todoText = e.currentTarget.parentNode.parentNode.querySelector('li').textContent;
+                    // console.log(todoText)
+                    // 날짜
+                    const todoDate = e.currentTarget.parentNode.parentNode.querySelectorAll('li')[1].textContent;
+                    // console.log(todoDate)
+
+                    // 수정영역의 폼에 값을 입력
+                    document.querySelector('.edit [name=title]').value = todoText;
+                    document.querySelector('.edit [name=dueDate]').value = todoDate;
+
+                    // 해당 요소가 몇번째 인덱스인지 값을 입력
+                    const list = document.querySelectorAll('.list ul')
+                    const array = Array.from(list) // 배열로 가져옴
+                    const indexNum = array.indexOf(e.currentTarget.parentNode.parentNode)
+                    document.querySelector('.edit [name=idx]').value = indexNum
+
+                    // 수정시 삭제 확인
+                    console.log(e.currentTarget.parentNode.parentNode.parentNode)
+                    const mdCheck = document.querySelector('input')
+                    mdCheck.setAttribute('type', 'hidden')
+                    mdCheck.setAttribute('name', 'mdCheck')
+                    e.currentTarget.parentNode.parentNode.parentNode.appendChild(mdCheck)
+                });
+                // 수정영역의 수정버튼 클릭시
+                editBtn.addEventListener('click', (e) => {
+                    const title = document.querySelector('.edit input[name=title]')
+                    const dueDate = document.querySelector('.edit input[name=dueDate]')
+                    const idx = document.querySelector('.edit input[name=idx]')
+                    const list = document.querySelectorAll('.list ul')
+                    const array = Array.from(list)
+
+                    // 수정전에 삭제됬는지 확인
+                    const mdCheck = document.querySelector('input[name=mdCheck]')
+                    if (mdCheck === null) {
+                        console.log('널이라 패스')
+                        title.value = '';
+                        dueDate.value = '';
+                        return
+                    }
+                    console.log('널이 아니라 실행')
+
+                    // console.log(array[idx.value])
+                    array[idx.value].querySelector('li:nth-child(1)').textContent = title.value;
+                    array[idx.value].querySelector('li:nth-child(2)').textContent = dueDate.value;
+                })
+
+                list.appendChild(addItem);
+                initForm();
+            });
+
+        });
     </script>
 </head>
 <body>
@@ -59,6 +131,7 @@
                     <li>할일</li>
                     <li>2023-12-31</li>
                     <li><input type="button" name="delete" value="삭제"></li>
+                    <li><input type="button" name="modify" value="수정"></li>
                 </ul>
             </li>
         </ul>
@@ -69,6 +142,15 @@
             <input type="text" name="title">
             <input type="date" name="dueDate">
             <input type="button" value="등록">
+        </div>
+    </section>
+    <section class="edit">
+        <h2>edit todo</h2>
+        <div>
+            <input type="hidden" name="idx">
+            <input type="text" name="title">
+            <input type="date" name="dueDate">
+            <input type="button" value="수정">
         </div>
     </section>
 </body>
