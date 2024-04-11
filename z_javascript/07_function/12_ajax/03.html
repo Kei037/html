@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            // ajax를 이용해 데이터 가져오기
+            // XMLHttpRequest 객체 생성
+            const xhr = new XMLHttpRequest();
+
+            // HTTP 요청 초기화. 통신 방식과 url 설정.
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/1');
+
+            // 이벤트 등록. XMLHttpRequest 객체의 readyStat 프로퍼티 값이 변할 때마다 자동으로 호출
+            xhr.onreadystatechange = () => {
+                // readyState 프로퍼티의 값이 DONE : 요청한 데이터의 처리가 완료되어 응답할 준비가 완료됨.
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+                if (xhr.status === 200) { // 서버(url)에 문서가 존재함.
+                    console.log(JSON.parse(xhr.response))
+
+                    const obj = JSON.parse(xhr.response);
+                    console.log(obj.title);
+                } else {
+                    console.error('Error', xhr.status, xhr.statusText);
+                }
+            }
+            xhr.send();  // url에 요청을 보냄.
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        /*
+        JSON.parse()
+        JSON 포맷의 문자열을 객체로 변환.
+        서버로부터 클라이언트에게 전송된 JSON 데이터는 문자열이고, 이 문자열을 객체로 변환.
+        JSON 포맷의 문자열을 객체화하는 것을 역직렬화 deserializing.
+         */
+        const obj = {
+            name: 'Lee',
+            age: 20,
+            alive: true,
+            hobby: ['traveling', 'tennis']
+        };
+        console.log(typeof obj)
+
+        // 객체를 JSON 포맷의 문자열로 변환.
+        const json = JSON.stringify(obj, null, 2);
+        console.log(typeof json)
+
+        // JSON 포맷의 문자열을 객체로 변환
+        const parsed = JSON.parse(json);
+        console.log(typeof parsed, parsed); // object
+
+        const todos = [
+            { id: 1, connect: 'HTML', completed: false },
+            { id: 2, connect: 'CSS', completed: true },
+            { id: 3, connect: 'JavaScript', completed: false }
+        ];
+        // 배열을 JSON 포맷의 문자열로 변환
+        const jsonArray = JSON.stringify(todos);
+
+        // JSON 포맷의 문자열을 배열로 변환, 배열의 요소까지 객체로 변환
+        const parsedArray = JSON.parse(jsonArray);
+        console.log(typeof parsedArray, parsedArray)
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

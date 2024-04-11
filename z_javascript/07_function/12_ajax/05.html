@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = document.querySelectorAll('[type=button]');
+            const printAlram = document.querySelectorAll('p')[0];
+            const printTemperature = document.querySelectorAll('p')[1]
+
+            let url
+            let place = '중구'
+
+            btns.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    place = item.value
+                    switch (item.value) {
+                        case '중구':
+                            url = getUrl(89, 90)
+                            break;
+                        case '동구':
+                            url = getUrl(90, 91)
+                            break;
+                        case '서구':
+                            url = getUrl(88, 90)
+                            break;
+                        case '남구':
+                            url = getUrl(89, 90)
+                            break;
+                        case '북구':
+                            url = getUrl(88, 92)
+                            break;
+                        case '수성구':
+                            url = getUrl(89, 89)
+                            break;
+                        case '달서구':
+                            url = getUrl(87, 89)
+                            break;
+                        default:
+                            url = getUrl(89, 90)
+                            console.log(url)
+                            break;
+                    }
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+                        if (xhr.status === 200) {
+                            jsonData = JSON.parse(xhr.response)
+
+                            const weatherItems = jsonData.response.body.items.item;
+
+                            let jsonStr = `[발표 날짜: ${weatherItems[0]["baseDate"]}]\n`;
+                            jsonStr += `[발표 시간: ${weatherItems[0]["baseTime"]}]`;
+                            for (let k in weatherItems) {
+                                let weatherItem = weatherItems[k];
+                                let obsrValue = weatherItem['obsrValue'];
+                                // T1H: 기온, RN1: 1시간 강수량, REG: 습도 %
+                                if (weatherItem['category'] === 'T1H') {
+                                    jsonStr += ` * 기온: ${obsrValue}[℃]`;
+                                } else if (weatherItem['category'] === 'REH') {
+                                    jsonStr += ` * 습도 ${obsrValue}[%]`;
+                                } else if (weatherItem['category'] === 'RN1') {
+                                    jsonStr += ` * 1시간 강수량: ${obsrValue}[mm]`;
+                                }
+                                jsonStr += '\n';
+                            }
+                            printAlram.textContent = `${place}의 현재날씨 입니다.`;
+                            printTemperature.textContent = jsonStr
+
+                        } else {
+                            console.error('Error', xhr.status, xhr.statusText);
+                        }
+                    }
+                    xhr.send();
+                })
+            })
+
+            const getUrl = function (nx, ny) {
+                const serviceKey = 'eClc8eKTygrd%2BejSIWt%2FbEA7ZN4R7xuAnGOIVXmUfHlDlCC%2FjZtjwaiFe1mjMj770Rwkd9mGI26k9nMogdJoeg%3D%3D';
+
+                // 현재 시간 구함
+                const today = new Date();
+
+                const baseDate = `${today.getFullYear()}${('0' + (today.getMonth() + 1)).slice(-2)}${('0' + today.getDate()).slice(-2)}`;
+                // 현재 분이 30분 이전이라면 이전 시간(정시)을 설정.
+                let baseTime = today.getMinutes() <= 30 ? `${today.getHours() -1}00` : `${today.getHours()}00`;
+                baseTime = (baseTime.length === 3) ? `0${baseTime}` : baseTime; // 10시 전이면 0을 하나 붙임.
+
+                const parameter = `?serviceKey=${serviceKey}&base_date=${baseDate}&base_time=${baseTime}&nx=${nx}&ny=${ny}&dataType=JSON`
+                return 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst' + parameter
+            }
+
+
+        })
+    </script>
+</head>
+<body>
+<div>
+    <p></p>
+    <p></p>
+</div>
+<input type="button" value="중구">
+<input type="button" value="동구">
+<input type="button" value="서구">
+<input type="button" value="남구">
+<input type="button" value="북구">
+<input type="button" value="수성구">
+<input type="button" value="달서구">
+</body>
+</html>
