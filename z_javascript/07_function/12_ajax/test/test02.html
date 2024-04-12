@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            margin: 0 auto;
+            margin-top: 50px;
+            border-right: none;
+            border-collapse: collapse;
+            word-break: break-all; /* 셀의 내용이 벗어나지 않도록 함 */
+        }
+        tbody {
+            border: none;
+        }
+        td, th {
+            width: 300px;
+            height: 50px;
+            padding: 5px;
+            border: 1px solid darkgray;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+        .beforeTime {
+            color: #ccc;
+        }
+    </style>
+    <script>
+        /* # 공공데이터 포털에서 '인천국제공항공사_버스정보' 검색
+        # https://www.data.go.kr/data/15095045/openapi.do
+        # 인천국제공항 여객터미널 T1,T2 버스 정보(공항행 첫차/막차,종점행 첫차/막차,성인요금,
+        # 버스등급,버스번호,지역,운수사,평일시간,주말시간,노선정보,승차위치)를 제공
+
+        -> 대구로 오는 버스노선만 테이블 형식으로 출력 */
+        document.addEventListener('DOMContentLoaded', () => {
+            const btns = document.querySelectorAll('[type=button]')
+
+            btns.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    printBus(getUrl(), item.value)
+                })
+            })
+
+        });
+
+        const getUrl = () => {
+            const serviceKey = 'eClc8eKTygrd%2BejSIWt%2FbEA7ZN4R7xuAnGOIVXmUfHlDlCC%2FjZtjwaiFe1mjMj770Rwkd9mGI26k9nMogdJoeg%3D%3D';
+            const parameter = `?serviceKey=${serviceKey}&area=6&numOfRows=50&pageNo=1&type=json`
+            return 'http://apis.data.go.kr/B551177/BusInformation/getBusInfo' + parameter
+        }
+
+        const printBus = function (url, name) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+                if (xhr.status === 200) {
+                    const jsonData = JSON.parse(xhr.response)
+                    const busItems = jsonData.response.body.items;
+                    const tableBody = document.querySelector('tbody')
+                    console.log(busItems)
+                    while (tableBody.firstChild) {
+                        tableBody.removeChild(tableBody.firstChild)
+                    }
+
+                    for (let item of busItems) {
+                        if (item['routeinfo'].indexOf(name) >= 0) {
+                            const trTag = document.createElement('tr')
+
+                            trTag.innerHTML = `
+                                    <td>${item['busnumber']}</td>
+                                    <td>${item['busclass']}</td>
+                                    <td>${item['adultfare']}</td>
+                                    <td>${sortStr(item['t1wdayt'], item['t2wdayt'])}</td>
+                                    <td>${sortStr(item['t1wt'], item['t2wt'])}</td>`;
+                            tableBody.appendChild(trTag);
+                        }
+                    }
+
+                } else {
+                    console.error('Error', xhr.status, xhr.statusText);
+                }
+            }
+            xhr.send();
+        }
+
+        const sortStr = function (string1, string2) {
+            // 기본 데이터는 문자열. 2개의 문자열을 결합하고, ',' 기준으로 배열로 변환
+            let tempList = (string1 + ',' + string2).split(",");
+            tempList = [...new Set(tempList)]; // 중복 제거
+            tempList = tempList.map((item) => item.trim()) // 공백 제거
+            // console.log("tempList")
+            // console.log(tempList)
+            tempList.sort() // 정렬
+
+            // 현재 시간 구해서 이전 시간이면 연하게 출력.
+            const today = new Date();
+            const todayTime = `${today.getHours()}${today.getMinutes()}`;
+            // console.log(todayTime)
+            tempList = tempList.map((item) => {
+                console.log(Number(item))
+                return Number(item) < Number(todayTime) ? `<span class="beforeTime">${item}</span>` : item;
+            });
+
+            return tempList.join(", "); // 배열은 문자열로 변환
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>버스번호</th>
+                <th>버스등급</th>
+                <th>성인요금</th>
+                <th>평일시긴표</th>
+                <th>주말시간표</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <div>
+        <input type="button" value="대구">
+        <input type="button" value="구미">
+        <input type="button" value="경산">
+        <input type="button" value="포항">
+    </div>
+</body>
+</html>
+</body>
+</html>

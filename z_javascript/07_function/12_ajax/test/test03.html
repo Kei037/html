@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        div input {
+            height: 40px;
+            background-color: #3a4bb9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+
+        div input:hover {
+            background-color: white;
+            color: #3a4bb9;
+        }
+        table {
+            margin: 0 auto;
+            margin-top: 50px;
+            border-right: none;
+            border-collapse: collapse;
+            word-break: break-all; /* 셀의 내용이 벗어나지 않도록 함 */
+        }
+        tbody {
+            border: none;
+        }
+        td, th {
+            width: 300px;
+            height: 50px;
+            padding: 5px;
+            border: 1px solid darkgray;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+        .beforeTime {
+            color: #ccc;
+        }
+    </style>
+    <script>
+        /* # 공공데이터 포털에서 '인천국제공항공사_여객편 주간 운항 현황' 검색
+        # https://www.data.go.kr/data/15095074/openapi.do
+        # 항공사가 대한항공인 경우만 항공사, 편명, 예정시간, 도착지공항 을 테이블로 출력
+
+        # 응답 메시지
+        # airline : 항공사 예)대한항공
+        # flightId : 편명 예) KE093
+        # scheduleDateTime : 예정시간 예) 202111051015
+        # airport : 도착지공항 예) 워싱턴 */
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log(getUrl())
+            const btns = document.querySelectorAll('[type=button]')
+            const locationObj = {
+                '나리타': "NRT",
+                '삿포로': "CTS",
+                '오사카/간사이': "KIX",
+                '후쿠오카': "FUK",
+                '홍콩': "HKG",
+            }
+
+            btns.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const name = item.getAttribute('value')
+                    let url = getUrl(locationObj[name])
+                    printAirport(url)
+                });
+            });
+        });
+
+        const getUrl = (name) => {
+            const serviceKey = 'eClc8eKTygrd%2BejSIWt%2FbEA7ZN4R7xuAnGOIVXmUfHlDlCC%2FjZtjwaiFe1mjMj770Rwkd9mGI26k9nMogdJoeg%3D%3D';
+            const parameter = `?serviceKey=${serviceKey}&airport_code=${name}&type=json`;
+            return 'http://apis.data.go.kr/B551177/StatusOfPassengerFlightsDSOdp/getPassengerDeparturesDSOdp' + parameter
+        }
+
+        const printAirport = function (url) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+                if (xhr.status === 200) {
+                    const jsonData = JSON.parse(xhr.response)
+                    // console.log(jsonData)
+                    const AirItems = jsonData.response.body.items;
+                    const tableBody = document.querySelector('tbody')
+                    // console.log(AirItems)
+                    while (tableBody.firstChild) {
+                        tableBody.removeChild(tableBody.firstChild)
+                    }
+                    for (let item of AirItems) {
+                        const trTag = document.createElement('tr')
+                        trTag.innerHTML = `
+                                <td>${item['airline']}</td>
+                                <td>${item['flightId']}</td>
+                                <td>${item['scheduleDateTime']}</td>
+                                <td>${item['airport']}</td>`;
+                        tableBody.appendChild(trTag)
+                    }
+
+                } else {
+                    console.error('Error', xhr.status, xhr.statusText);
+                }
+            }
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <input type="button" value="나리타">
+        <input type="button" value="삿포로">
+        <input type="button" value="오사카/간사이">
+        <input type="button" value="후쿠오카">
+        <input type="button" value="홍콩">
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>항공사</th>
+                <th>편명</th>
+                <th>예정시간</th>
+                <th>도착지공항</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
+</body>
+</html>

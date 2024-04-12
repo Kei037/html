@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            margin: 0 auto;
+            margin-top: 50px;
+            border-right: none;
+            border-collapse: collapse;
+            word-break: break-all; /* 셀의 내용이 벗어나지 않도록 함 */
+        }
+        tbody {
+            border: none;
+        }
+        td, th {
+            width: 300px;
+            height: 50px;
+            padding: 5px;
+            border: 1px solid darkgray;
+            text-align: center;
+        }
+        th {
+            background-color: lightgray;
+        }
+    </style>
+    <script>
+        /* # 공공데이터 포털에서 '인천국제공항공사_버스정보' 검색
+        # https://www.data.go.kr/data/15095045/openapi.do
+        # 인천국제공항 여객터미널 T1,T2 버스 정보(공항행 첫차/막차,종점행 첫차/막차,성인요금,
+        # 버스등급,버스번호,지역,운수사,평일시간,주말시간,노선정보,승차위치)를 제공
+
+        -> 대구로 오는 버스노선만 테이블 형식으로 출력 */
+        document.addEventListener('DOMContentLoaded', () => {
+            printBus(getUrl())
+        });
+        const getUrl = () => {
+            const serviceKey = 'eClc8eKTygrd%2BejSIWt%2FbEA7ZN4R7xuAnGOIVXmUfHlDlCC%2FjZtjwaiFe1mjMj770Rwkd9mGI26k9nMogdJoeg%3D%3D';
+            const parameter = `?serviceKey=${serviceKey}&area=6&numOfRows=50&pageNo=1&type=json`
+            return 'http://apis.data.go.kr/B551177/BusInformation/getBusInfo' + parameter
+        }
+
+        const printBus = function (url) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+                if (xhr.status === 200) {
+                    jsonData = JSON.parse(xhr.response)
+                    const busItem = jsonData.response.body.items;
+                    console.log(busItem)
+
+                    const bus = document.querySelector('.bus')
+
+                    for (let entry of busItem) {
+                        if (entry['routeinfo'].indexOf('대구') >= 0) {
+                            const trTag = document.createElement('tr')
+                            trTag.innerHTML = `
+                                    <td>${entry['busnumber']}</td>
+                                    <td>${entry['busclass']}</td>
+                                    <td>${entry['adultfare']}</td>
+                                    <td>${sortStr(entry['t1wdayt'], entry['t2wdayt'])}</td>
+                                    <td>${sortStr(entry['t1wt'], entry['t2wt'])}</td>`;
+                            bus.parentNode.appendChild(trTag);
+
+                        }
+                    }
+
+                } else {
+                    console.error('Error', xhr.status, xhr.statusText);
+                }
+            }
+            xhr.send();
+        }
+
+        const sortStr = function (string1, string2) {
+            // 기본 데이터는 문자열. 2개의 문자열을 결합하고, ',' 기준으로 배열로 변환
+            let tempList = (string1 + ',' + string2).split(",");
+            tempList = [...new Set(tempList)]; // 중복 제거
+            tempList = tempList.map((item) => item.trim()) // 공백 제거
+            // console.log("tempList")
+            // console.log(tempList)
+            tempList.sort() // 정렬
+            return tempList.join(", "); // 배열은 문자열로 변환
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr class="bus">
+            <th>버스번호</th>
+            <th>버스등급</th>
+            <th>성인요금</th>
+            <th>평일시긴표</th>
+            <th>주말시간표</th>
+        </tr>
+    </table>
+</body>
+</html>
+</body>
+</html>
